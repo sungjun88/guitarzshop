@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hb.mybatis.VO;
+
 /**
  * Handles requests for the application home page.
  */
@@ -40,16 +42,22 @@ public class HomeController {
 	public void main(Locale locale, Model model) {
 	}
 	
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public void login(Locale locale, Model model) {
+	@RequestMapping(value = "/loginpage.do", method = RequestMethod.GET)
+	public void loginpage(Locale locale, Model model) {
 	}
-	
 	
 	
 	@RequestMapping(method = RequestMethod.GET, value = "menu")  //인클루드용
 	   public String newItem(Model model) {
 	       return "menu";
 	   }
+	
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	public ModelAndView login(VO vo) {
+		ModelAndView mv = new ModelAndView("loginok");
+		mv.addObject("vo",vo);
+		return mv;
+	}
 	
 	
 	

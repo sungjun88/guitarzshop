@@ -130,7 +130,7 @@ function myFunction() {
 <body>
 
 <div class="topest">
-  <a href="login.do">로그인</a>
+  <a href="loginpage.do">로그인</a>
   <a href="#news">회원가입</a>
   <a href="#contact">마이페이지</a>
   <a href="#about">주문/배송</a>

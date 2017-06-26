@@ -25,7 +25,8 @@ fieldset {
 </style>
 <script type="text/javascript">
 	function login_go(f) {
-		alert($("#pw").value);
+		f.action = ".do";
+		f.submit();
 	}
 </script>
 </head>
@@ -36,7 +37,7 @@ fieldset {
 		<legend>LOG IN</legend>
 		<form method="post">
 			ID : <input type="text" name="id"><br> PW : <input type="text" name="pw"><br>
-			<input type="button" value="LOGIN" onclick="login_go()">
+			<input type="button" value="LOGIN" onclick="login_go(this.form)">
 		</form>
 	</fieldset>
 </body>
