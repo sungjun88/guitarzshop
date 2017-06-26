@@ -37,6 +37,13 @@ a:visited {
 	float : right;
 	text-decoration: none;
 	padding: 10px;
+	
+	display: block;
+}
+.topest a:link, a:visited { 
+    color: black;
+    text-decoration: none;
+    cursor: auto;
 }
 
 
