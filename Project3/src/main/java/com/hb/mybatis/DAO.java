@@ -24,7 +24,7 @@ public class DAO {
 	
 	// 로그인
 	public UVO getList(UVO uvo){
-		return (UVO) template.selectList("list", uvo);
+		return template.selectOne("list", uvo);
 	}
 	
 	// 원글 list

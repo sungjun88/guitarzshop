@@ -36,7 +36,7 @@ fieldset {
 	<fieldset>
 		<legend>LOG IN</legend>
 		<form method="post">
-			ID : <input type="text" name="id"><br> PW : <input type="text" name="pw"><br>
+			ID : <input type="text" name="cus_id"><br> PW : <input type="text" name="cus_pw"><br>
 			<input type="button" value="LOGIN" onclick="login_go(this.form)">
 		</form>
 	</fieldset>

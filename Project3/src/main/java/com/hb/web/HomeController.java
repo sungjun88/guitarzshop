@@ -1,7 +1,6 @@
 
 
 package com.hb.web;
-
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +31,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/")
 	public String home(Locale locale, Model model) {
-		
-		return "home";
+		return "index";
 	}
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public void main(Locale locale, Model model) {

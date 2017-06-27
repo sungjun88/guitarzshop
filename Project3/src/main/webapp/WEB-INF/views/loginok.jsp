@@ -33,7 +33,7 @@ fieldset {
 	<fieldset>
 		<legend>LOG IN</legend>
 		<form method="post">
-			<b>${uvo.id }님 환영합니다. </b>
+			<b>${uvo.cus_id }님 환영합니다. </b>
 		</form>
 	</fieldset>
 </body>
