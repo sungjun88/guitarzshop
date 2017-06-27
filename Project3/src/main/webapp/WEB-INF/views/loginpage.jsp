@@ -32,13 +32,41 @@ fieldset {
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/menu" flush="false" />
+	${login }
+	<c:choose>
+		<c:when test="${login == -1}">
+			<b>ID와 비밀번호를 확인해주세요</b>
+			<fieldset>
+				<legend>LOG IN</legend>
+				<form method="post">
+					ID : <input type="text" name="cus_id"><br> PW : <input
+						type="text" name="cus_pw"><br> <input type="button"
+						value="LOGIN" onclick="login_go(this.form)">
+				</form>
+			</fieldset>
+		</c:when>
+		<c:when test="${login == 1}">
+			<fieldset>
+				<legend>LOG IN</legend>
+				<form method="post">
+					ID : <input type="text" name="cus_id"><br> PW : <input
+						type="text" name="cus_pw"><br> <input type="button"
+						value="LOGIN" onclick="login_go(this.form)">
+				</form>
+			</fieldset>
+		</c:when>
+		<c:otherwise>
+			<fieldset>
+				<legend>LOG IN</legend>
+				<form method="post">
+					ID : <input type="text" name="cus_id"><br> PW : <input
+						type="text" name="cus_pw"><br> <input type="button"
+						value="LOGIN" onclick="login_go(this.form)">
+				</form>
+			</fieldset>
+		</c:otherwise>
+	</c:choose>
 
-	<fieldset>
-		<legend>LOG IN</legend>
-		<form method="post">
-			ID : <input type="text" name="cus_id"><br> PW : <input type="text" name="cus_pw"><br>
-			<input type="button" value="LOGIN" onclick="login_go(this.form)">
-		</form>
-	</fieldset>
+
 </body>
 </html>

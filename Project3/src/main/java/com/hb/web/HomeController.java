@@ -3,6 +3,10 @@
 package com.hb.web;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,15 +34,20 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/")
-	public String home(Locale locale, Model model) {
-		return "index";
+	public ModelAndView home(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("index");
+		return mv;
 	}
-	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
-	public void main(Locale locale, Model model) {
+	@RequestMapping(value = "/main.do")
+	public ModelAndView main(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("main");
+		return mv;
 	}
 	
-	@RequestMapping(value = "/loginpage.do", method = RequestMethod.GET)
-	public void loginpage(Locale locale, Model model) {
+	@RequestMapping(value = "/loginpage.do")
+	public ModelAndView loginpage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("loginpage");
+		return mv;
 	}
 	
 	
@@ -46,40 +55,48 @@ public class HomeController {
 	   public String newItem(Model model) {
 	       return "menu";
 	   }
-	
-	@RequestMapping(value = "/login.do")
-	public ModelAndView login(@ModelAttribute("uvo")UVO uvo){
-		uvo = dao.getList(uvo);
-		
-		System.out.println(uvo);
-		return new ModelAndView("loginok");
+	@RequestMapping(method = RequestMethod.POST, value = "menu")  //인클루드용
+	public String newItem1(Model model) {
+		return "menu";
 	}
 	
-	 /*  //로그인 메소드
-	   @RequestMapping("/login.hb")
-	   public ModelAndView getLogin(HttpServletRequest request){
-	      System.out.println("hello");
-	      String u_email = request.getParameter("u_email");
-	      String u_pwd = request.getParameter("u_pwd");
-	      UVO uvo = new UVO();
-	      uvo.setU_email(u_email);
-	      uvo.setU_pwd(u_pwd);
-	      UVO uvo2 = dao.getlogin(uvo);
-	      System.out.println("kk");
-	      
-	      if(uvo2!=null){
-	         System.out.println("loginsuccess");
-	         HttpSession session = request.getSession();
-	         session.setAttribute("uvo", uvo2);
-	         session.setAttribute("login", false);
-	         return new ModelAndView("redirect:/");
-	      }else{
-	         System.out.println("loginfail");
-	         return new ModelAndView("redirect:/");
-	      }
-	   
-	   }
-	}*/
+	
+	@RequestMapping(value = "/login.do")
+	public ModelAndView getLogin(HttpServletRequest request){
+		UVO uvo = new UVO();
+		uvo.setCus_id(request.getParameter("cus_id"));
+		uvo.setCus_pw(request.getParameter("cus_pw"));
+		UVO uvo2 = dao.getList(uvo);
+		HttpSession session = request.getSession();
+		if(uvo2!=null){
+			session.setAttribute("uvo", uvo2);
+			session.setAttribute("login", 1);			
+			return new ModelAndView("main");
+		}else{
+			session.setAttribute("login", -1);			
+			return new ModelAndView("loginpage");
+		}
+		
+	}
+	
+	@RequestMapping(value = "/logout.do")
+	public ModelAndView getLogout(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.invalidate();
+		ModelAndView mv = new ModelAndView("main");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/joinPage.do")
+	public ModelAndView getJoinPage(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		ModelAndView mv = new ModelAndView("joinpage");
+		return mv;
+	}
+	
+
+	
+	 
 	
 	
 	
