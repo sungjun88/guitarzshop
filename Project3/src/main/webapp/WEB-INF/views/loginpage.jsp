@@ -25,7 +25,7 @@ fieldset {
 </style>
 <script type="text/javascript">
 	function login_go(f) {
-		f.action = ".do";
+		f.action = "login.do";
 		f.submit();
 	}
 </script>

@@ -21,6 +21,12 @@ public class DAO {
 	public int getTotalCount(){
 		return template.selectOne("totalCount");
 	}
+	
+	// 로그인
+	public UVO getList(UVO uvo){
+		return (UVO) template.selectList("list", uvo);
+	}
+	
 	// 원글 list
 	public List<BVO> getList(Map<String, Integer> map){
 		return template.selectList("list", map);

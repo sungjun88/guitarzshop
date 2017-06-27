@@ -1,18 +1,19 @@
+
+
 package com.hb.web;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hb.mybatis.VO;
+import com.hb.mybatis.DAO;
+import com.hb.mybatis.UVO;
 
 /**
  * Handles requests for the application home page.
@@ -20,21 +21,17 @@ import com.hb.mybatis.VO;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	@Autowired
+	private DAO dao;
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
+	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/")
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
 	}
@@ -52,12 +49,41 @@ public class HomeController {
 	       return "menu";
 	   }
 	
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public ModelAndView login(VO vo) {
-		ModelAndView mv = new ModelAndView("loginok");
-		mv.addObject("vo",vo);
-		return mv;
+	@RequestMapping(value = "/login.do")
+	public ModelAndView login(@ModelAttribute("uvo")UVO uvo){
+		uvo = dao.getList(uvo);
+		
+		System.out.println(uvo);
+		return new ModelAndView("loginok");
 	}
+	
+	 /*  //로그인 메소드
+	   @RequestMapping("/login.hb")
+	   public ModelAndView getLogin(HttpServletRequest request){
+	      System.out.println("hello");
+	      String u_email = request.getParameter("u_email");
+	      String u_pwd = request.getParameter("u_pwd");
+	      UVO uvo = new UVO();
+	      uvo.setU_email(u_email);
+	      uvo.setU_pwd(u_pwd);
+	      UVO uvo2 = dao.getlogin(uvo);
+	      System.out.println("kk");
+	      
+	      if(uvo2!=null){
+	         System.out.println("loginsuccess");
+	         HttpSession session = request.getSession();
+	         session.setAttribute("uvo", uvo2);
+	         session.setAttribute("login", false);
+	         return new ModelAndView("redirect:/");
+	      }else{
+	         System.out.println("loginfail");
+	         return new ModelAndView("redirect:/");
+	      }
+	   
+	   }
+	}*/
+	
+	
 	
 	
 	

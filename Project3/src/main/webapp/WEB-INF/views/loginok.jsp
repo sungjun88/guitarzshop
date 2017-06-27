@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +24,7 @@ fieldset {
 }
 </style>
 <script type="text/javascript">
-	function login_go(f) {
-		f.action = ".do";
-		f.submit();
-	}
+
 </script>
 </head>
 <body>
@@ -36,7 +33,7 @@ fieldset {
 	<fieldset>
 		<legend>LOG IN</legend>
 		<form method="post">
-			<b>${id }님 환영합니다. </b>
+			<b>${uvo.id }님 환영합니다. </b>
 		</form>
 	</fieldset>
 </body>

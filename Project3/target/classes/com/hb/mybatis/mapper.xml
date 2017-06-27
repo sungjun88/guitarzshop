@@ -8,6 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from bbs_t 
 	</select>
 	
+	<!-- 로그인-->
+	<select id="list" resultType="com.hb.mybatis.UVO" parameterType="com.hb.mybatis.UVO">
+		select * from customer where cus_id = #{cus_id} and cus_pw = #{cus_pw}
+	</select>
+	
 	<!-- 원글리스트 -->
 	<select id="list" resultType="com.hb.mybatis.BVO" parameterType="Map">
 		select * from (
