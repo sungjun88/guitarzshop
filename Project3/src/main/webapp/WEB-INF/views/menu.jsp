@@ -147,17 +147,27 @@ a:visited {
 	}
 </script>
 <body>
-
+	${cus_id}
 	<div class="topest">
 		<c:choose>
 			<c:when test="${login == 1}">
-				<b>${uvo.cus_name}님 환영합니다.</b>
-				<a href="logout.do">로그아웃</a>
+				<c:choose>
+					<c:when test="${cus_id == admin}">
+						<b>${uvo.cus_name}님 환영합니다.</b>
+						<a href="adminpage.do">관리자페이지</a>
+						<a href="logout.do">로그아웃</a>
+					</c:when>
+					<c:otherwise>
+						<b>${uvo.cus_name}님 환영합니다.</b>
+						<a href="logout.do">로그아웃</a>
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:otherwise>
 				<a href="loginpage.do">로그인</a>
 			</c:otherwise>
 		</c:choose>
+		
 
 		<a href="joinPage.do">회원가입</a> <a href="#contact">마이페이지</a> <a href="#about">주문/배송</a>
 		<a href="#about">장바구니</a>

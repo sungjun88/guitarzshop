@@ -1,6 +1,8 @@
 
 
 package com.hb.web;
+import java.io.File;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,12 +12,17 @@ import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hb.mybatis.BVO;
 import com.hb.mybatis.DAO;
+import com.hb.mybatis.PVO;
 import com.hb.mybatis.UVO;
 
 /**
@@ -45,6 +52,75 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("main");
 		return mv;
 	}
+	
+	//admin
+	@RequestMapping(value = "/adminpage.do")
+	public ModelAndView adminpage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("adminpage");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/addproductpage.do")
+	public ModelAndView addproductpage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("addproductpage");
+		return mv;
+	}
+	
+	@RequestMapping(value="/addproductok", method=RequestMethod.GET)
+	public ModelAndView addproductok(HttpServletRequest request){
+		return new ModelAndView("alllist");
+	}
+	@RequestMapping(value="/addproductok", method=RequestMethod.POST)
+	public ModelAndView addproductok(
+									@RequestParam("pro_category") String pro_category,
+									@RequestParam("pro_code") String pro_code,
+									@RequestParam("pro_name") String pro_name,
+									@RequestParam("pro_company") String pro_company,
+									@RequestParam("pro_price") String pro_price,
+									@RequestParam("pro_saleprice") String pro_saleprice,
+									@RequestParam("pro_thum")MultipartFile pro_thum,
+									@RequestParam("pro_img1")MultipartFile pro_img1,
+									@RequestParam("pro_img2")MultipartFile pro_img2,
+									@RequestParam("pro_img3")MultipartFile pro_img3,
+									@RequestParam("pro_img4")MultipartFile pro_img4,
+									@RequestParam("pro_img5")MultipartFile pro_img5,
+									@RequestParam("pro_img6")MultipartFile pro_img6,
+									@RequestParam("pro_img7")MultipartFile pro_img7,
+									@RequestParam("pro_content") String pro_content,
+									@RequestParam("pro_quantity") String pro_quantity,
+									HttpServletRequest request){
+	try {
+		String path = request.getSession().getServletContext().getRealPath("/WEB-INF/upload");
+		PVO pvo = new PVO();
+		pvo.setPro_category(pro_category);
+		pvo.setPro_code(pro_code);
+		pvo.setPro_name(pro_name);
+		pvo.setPro_company(pro_company);
+		pvo.setPro_price(pro_price);
+		pvo.setPro_saleprice(pro_saleprice);
+		pvo.setPro_content(pro_content);
+		pvo.setPro_quantity(pro_quantity);
+		+++++++++++++++++++++++++++
+		++++++
+		// 첨부파일 없을때
+		if(pro_thum.getOriginalFilename()== null){
+			pvo.setFile_name("");	
+		}else{
+			pvo.setFile_name(pro_thum.getOriginalFilename());
+		}
+		int res = dao.getInsert(pvo);
+		if(res>0){
+			byte[] in = pro_thum.getBytes();
+			File out = new File(path,bvo.getFile_name());
+			FileCopyUtils.copy(in, out);
+		}
+		
+	} catch (Exception e) {
+	}
+		return new ModelAndView("redirect:/list.hb");
+	}
+	
+	
 	
 	// top of topnav
 	
@@ -129,6 +205,15 @@ public class HomeController {
 	@RequestMapping(value = "/elec.do")
 	public ModelAndView elecpage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("elecpage");
+		HttpSession session = request.getSession();
+		
+		List<PVO> eleclist = dao.getElecList(); 
+		mv.addObject("eleclist", eleclist);
+		System.out.println(eleclist);
+		int res = eleclist.size();
+		mv.addObject("eleclistsize", res);
+		
+		
 		return mv;
 	}
 	

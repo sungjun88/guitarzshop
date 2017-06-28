@@ -1,11 +1,11 @@
 package com.hb.mybatis;
 
 public class PVO {
-	private String pro_no,pro_category,pro_code,pro_name,pro_company,pro_price,pro_saleprice,pro_thum,pro_img1,pro_img2,pro_img3,pro_img4,pro_img5,pro_img6,pro_img7,pro_content,pro_date;
+	private String pro_no,pro_category,pro_code,pro_name,pro_company,pro_price,pro_saleprice,pro_thum,pro_img1,pro_img2,pro_img3,pro_img4,pro_img5,pro_img6,pro_img7,pro_content,pro_date,pro_quantity;
 	public PVO() {	}
 	public PVO(String pro_no, String pro_category, String pro_code, String pro_name, String pro_company,
 			String pro_price, String pro_saleprice, String pro_thum, String pro_img1, String pro_img2, String pro_img3,
-			String pro_img4, String pro_img5, String pro_img6, String pro_img7, String pro_content, String pro_date) {
+			String pro_img4, String pro_img5, String pro_img6, String pro_img7, String pro_content, String pro_date, String pro_guantity) {
 		super();
 		this.pro_no = pro_no;
 		this.pro_category = pro_category;
@@ -24,6 +24,8 @@ public class PVO {
 		this.pro_img7 = pro_img7;
 		this.pro_content = pro_content;
 		this.pro_date = pro_date;
+		this.pro_quantity = pro_quantity;
+		
 	}
 	public String getPro_no() {
 		return pro_no;
@@ -127,13 +129,21 @@ public class PVO {
 	public void setPro_date(String pro_date) {
 		this.pro_date = pro_date;
 	}
+	
+	public String getPro_quantity() {
+		return pro_quantity;
+	}
+	public void setPro_quantity(String pro_quantity) {
+		this.pro_quantity = pro_quantity;
+	}
 	@Override
 	public String toString() {
 		return "PVO [pro_no=" + pro_no + ", pro_category=" + pro_category + ", pro_code=" + pro_code + ", pro_name="
 				+ pro_name + ", pro_company=" + pro_company + ", pro_price=" + pro_price + ", pro_saleprice="
 				+ pro_saleprice + ", pro_thum=" + pro_thum + ", pro_img1=" + pro_img1 + ", pro_img2=" + pro_img2
 				+ ", pro_img3=" + pro_img3 + ", pro_img4=" + pro_img4 + ", pro_img5=" + pro_img5 + ", pro_img6="
-				+ pro_img6 + ", pro_img7=" + pro_img7 + ", pro_content=" + pro_content + ", pro_date=" + pro_date + "]";
+				+ pro_img6 + ", pro_img7=" + pro_img7 + ", pro_content=" + pro_content + ", pro_date=" + pro_date
+				+ ", pro_quantity=" + pro_quantity + "]";
 	}
 	
 }

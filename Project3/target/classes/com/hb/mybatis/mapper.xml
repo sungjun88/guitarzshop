@@ -13,13 +13,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from customer where cus_id = #{cus_id} and cus_pw = #{cus_pw}
 	</select>
 	
-	<!-- 원글 삽입 -->
-	<insert id="join" parameterType="com.hb.mybatis.BVO">
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="com.hb.mybatis.UVO">
 		insert into customer values(customer_seq.nextval,#{cus_name},
 		#{cus_id},#{cus_pw},#{cus_birth},#{cus_gender},#{cus_email},#{cus_phone},
 		#{cus_addr},#{cus_recomm},#{cus_point})	
 	</insert>
 	
+	<!-- 일렉리스트 -->
+    <select id="eleclist" resultType="com.hb.mybatis.PVO">
+    select * from product where pro_category = 'elec'
+    </select>
 	
 	
 </mapper>

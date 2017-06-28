@@ -32,6 +32,11 @@ public class DAO {
 		return template.insert("join", uvo);
 	}
 	
+	// 일렉리스트
+	public List<PVO> getElecList(){
+		return template.selectList("eleclist");
+	}
+	
 	//원글 삽입
 	public int getInsert(BVO bvo){
 		return template.insert("insert", bvo);
