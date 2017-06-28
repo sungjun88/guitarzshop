@@ -23,18 +23,23 @@ public class DAO {
 	}
 	
 	// 로그인
-	public UVO getList(UVO uvo){
-		return template.selectOne("list", uvo);
+	public UVO getLogin(UVO uvo){
+		return template.selectOne("login", uvo);
 	}
-	
-	// 원글 list
-	public List<BVO> getList(Map<String, Integer> map){
-		return template.selectList("list", map);
+		
+	// 회원가입
+	public int getJoin(UVO uvo){
+		return template.insert("join", uvo);
 	}
 	
 	//원글 삽입
 	public int getInsert(BVO bvo){
 		return template.insert("insert", bvo);
+	}
+	
+	// 원글 list
+	public List<BVO> getList(Map<String, Integer> map){
+		return template.selectList("list", map);
 	}
 	
 	//원글 상세보기
@@ -78,21 +83,3 @@ public class DAO {
 		template.insert("ans_Delete", c_idx);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

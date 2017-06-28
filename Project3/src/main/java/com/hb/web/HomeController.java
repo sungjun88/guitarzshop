@@ -51,11 +51,11 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.GET, value = "menu")  //인클루드용
+	@RequestMapping(method = RequestMethod.GET, value = "menu")  //�씤�겢猷⑤뱶�슜
 	   public String newItem(Model model) {
 	       return "menu";
 	   }
-	@RequestMapping(method = RequestMethod.POST, value = "menu")  //인클루드용
+	@RequestMapping(method = RequestMethod.POST, value = "menu")  //�씤�겢猷⑤뱶�슜
 	public String newItem1(Model model) {
 		return "menu";
 	}
@@ -66,7 +66,7 @@ public class HomeController {
 		UVO uvo = new UVO();
 		uvo.setCus_id(request.getParameter("cus_id"));
 		uvo.setCus_pw(request.getParameter("cus_pw"));
-		UVO uvo2 = dao.getList(uvo);
+		UVO uvo2 = dao.getLogin(uvo);
 		HttpSession session = request.getSession();
 		if(uvo2!=null){
 			session.setAttribute("uvo", uvo2);
@@ -93,6 +93,31 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("joinpage");
 		return mv;
 	}
+	
+	@RequestMapping(value = "/join.do")
+	public ModelAndView getJoin(HttpServletRequest request){
+		UVO uvo = new UVO();
+		uvo.setCus_name(request.getParameter("cus_name"));
+		uvo.setCus_id(request.getParameter("cus_id"));
+		uvo.setCus_pw(request.getParameter("cus_pw"));
+		uvo.setCus_birth(request.getParameter("cus_birth"));
+		uvo.setCus_gender(request.getParameter("cus_gender"));
+		uvo.setCus_email(request.getParameter("cus_email"));
+		uvo.setCus_phone(request.getParameter("cus_phone"));
+		uvo.setCus_addr(request.getParameter("cus_addr"));
+		uvo.setCus_recomm(request.getParameter("cus_recomm"));
+		HttpSession session = request.getSession();
+		session.setAttribute("join", 0);
+		if(dao.getJoin(uvo)==1){
+			session.setAttribute("uvo", uvo);
+			return new ModelAndView("joinok");
+		}else{
+			session.setAttribute("join", -1);			
+			return new ModelAndView("loginpage");
+		}
+		
+	}
+	
 	
 
 	
