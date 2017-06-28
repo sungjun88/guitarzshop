@@ -168,7 +168,7 @@ a:visited {
 	</div>
 
 	<div class="topnav" id="myTopnav">
-		<a href="#home">HOME</a> <a href="#elec">ELEC</a> <a href="#acoustic">ACOUSTIC</a>
+		<a href="#home">HOME</a> <a href="elec.do">ELEC</a> <a href="#acoustic">ACOUSTIC</a>
 		<a href="#effector">EFFECTOR</a> <a href="#amp">AMP</a> <a href="#etc">ETC</a>
 		<a href="javascript:void(0);" style="font-size: 15px;" class="icon"
 			onclick="myFunction()">&#9776;</a>

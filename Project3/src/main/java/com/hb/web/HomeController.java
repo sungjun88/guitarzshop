@@ -38,11 +38,15 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
+	
+	
 	@RequestMapping(value = "/main.do")
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("main");
 		return mv;
 	}
+	
+	// top of topnav
 	
 	@RequestMapping(value = "/loginpage.do")
 	public ModelAndView loginpage(HttpServletRequest request) {
@@ -51,11 +55,11 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.GET, value = "menu")  //�씤�겢猷⑤뱶�슜
+	@RequestMapping(method = RequestMethod.GET, value = "menu")  //for include
 	   public String newItem(Model model) {
 	       return "menu";
 	   }
-	@RequestMapping(method = RequestMethod.POST, value = "menu")  //�씤�겢猷⑤뱶�슜
+	@RequestMapping(method = RequestMethod.POST, value = "menu")  //for include
 	public String newItem1(Model model) {
 		return "menu";
 	}
@@ -106,6 +110,7 @@ public class HomeController {
 		uvo.setCus_phone(request.getParameter("cus_phone"));
 		uvo.setCus_addr(request.getParameter("cus_addr"));
 		uvo.setCus_recomm(request.getParameter("cus_recomm"));
+		uvo.setCus_point("0");
 		HttpSession session = request.getSession();
 		session.setAttribute("join", 0);
 		if(dao.getJoin(uvo)==1){
@@ -119,7 +124,13 @@ public class HomeController {
 	}
 	
 	
-
+	//bottom of topnav
+	
+	@RequestMapping(value = "/elec.do")
+	public ModelAndView elecpage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("elecpage");
+		return mv;
+	}
 	
 	 
 	

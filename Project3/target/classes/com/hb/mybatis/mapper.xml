@@ -17,60 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="join" parameterType="com.hb.mybatis.BVO">
 		insert into customer values(customer_seq.nextval,#{cus_name},
 		#{cus_id},#{cus_pw},#{cus_birth},#{cus_gender},#{cus_email},#{cus_phone},
-		#{cus_addr},#{cus_recomm})	
+		#{cus_addr},#{cus_recomm},#{cus_point})	
 	</insert>
 	
 	
-	<!-- 원글 삽입 -->
-	<insert id="insert" parameterType="com.hb.mybatis.BVO">
-		insert into bbs_t values(bbs_t_seq.nextval,#{subject},
-		#{writer},#{content},#{file_name},#{pwd},sysdate,#{ip},0)	
-	</insert>
 	
-	<!--원글 상세보기 -->
-	<select id="onelist" parameterType="String" resultType="com.hb.mybatis.BVO">
-			select * from bbs_t where b_idx = #{b_idx} 
-	</select>
-	
-	<!--원글 히트 업데이트  -->
-	<update id="hit" parameterType="com.hb.mybatis.BVO">
-		update bbs_t set hit = #{hit} where b_idx = #{b_idx}
-	</update>
-	
-	<!-- 원글 업데이트 -->
-	<update id="update" parameterType="com.hb.mybatis.BVO">
-		update bbs_t set subject=#{subject}, writer=#{writer}, content=#{content},
-		file_name=#{file_name} where b_idx = #{b_idx}
-	</update>
-	
-	<update id="update2" parameterType="com.hb.mybatis.BVO">
-		update bbs_t set subject=#{subject}, writer=#{writer}, content=#{content}
-		 where b_idx = #{b_idx}
-	</update>
-	
-	<!-- 원글 삭제 : 댓글이 있으면 댓글 먼저 삭제 해야 됨  -->
-	<delete id="ans_Delete_all" parameterType="String">
-		delete  from comment_t where b_idx = #{b_idx}
-	</delete>
-	<delete id="delete" parameterType="String">
-		delete from bbs_t where b_idx = #{b_idx}
-	</delete>
-	
-	<!-- 댓글 리스트 -->
-	<select id="ans_list" parameterType="String" resultType="com.hb.mybatis.CVO">
-		select * from comment_t where b_idx = #{b_idx} order by c_idx desc
-	</select>
-	
-	<!-- 댓글 삽입 -->
-	<insert id="ans_insert" parameterType="com.hb.mybatis.CVO">
-		insert into comment_t values(comment_t_seq.nextval, #{writer},
-		#{content},#{pwd},sysdate,#{ip},#{b_idx})
-	</insert>
-	
-	<!-- 댓글 삭제  -->
-	<delete id="ans_Delete" parameterType="String">
-		delete  from comment_t where c_idx = #{c_idx} 
-	</delete>
 </mapper>
 
 
