@@ -50,6 +50,12 @@ public class HomeController {
 	@RequestMapping(value = "/main.do")
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("main");
+		
+		List<PVO> productlist = dao.getProductList(); 
+		mv.addObject("productlist", productlist);
+		int res = productlist.size();
+		mv.addObject("productlistsize", res);
+		
 		return mv;
 	}
 	
@@ -70,6 +76,7 @@ public class HomeController {
 	public ModelAndView addproductok(HttpServletRequest request){
 		return new ModelAndView("alllist");
 	}
+	
 	@RequestMapping(value="/addproductok", method=RequestMethod.POST)
 	public ModelAndView addproductok(
 									@RequestParam("pro_category") String pro_category,
@@ -90,7 +97,9 @@ public class HomeController {
 									@RequestParam("pro_quantity") String pro_quantity,
 									HttpServletRequest request){
 	try {
-		String path = request.getSession().getServletContext().getRealPath("/WEB-INF/upload");
+		
+		
+		String path = request.getSession().getServletContext().getRealPath("resources/upload/"+pro_category);
 		PVO pvo = new PVO();
 		pvo.setPro_category(pro_category);
 		pvo.setPro_code(pro_code);
@@ -100,24 +109,57 @@ public class HomeController {
 		pvo.setPro_saleprice(pro_saleprice);
 		pvo.setPro_content(pro_content);
 		pvo.setPro_quantity(pro_quantity);
-		+++++++++++++++++++++++++++
-		++++++
-		// 첨부파일 없을때
-		if(pro_thum.getOriginalFilename()== null){
-			pvo.setFile_name("");	
+		pvo.setPro_thum(pro_thum.getOriginalFilename());
+		pvo.setPro_img1(pro_img1.getOriginalFilename());
+		
+		//첨부파일 없을때
+		if(pro_img2.getOriginalFilename()== null){
+			pvo.setPro_img2("");
 		}else{
-			pvo.setFile_name(pro_thum.getOriginalFilename());
+			pvo.setPro_img2(pro_img2.getOriginalFilename());
 		}
-		int res = dao.getInsert(pvo);
+		if(pro_img3.getOriginalFilename()== null){
+			pvo.setPro_img3("");	
+		}else{
+			pvo.setPro_img3(pro_img3.getOriginalFilename());
+		}
+		if(pro_img4.getOriginalFilename()== null){
+			pvo.setPro_img4("");	
+		}else{
+			pvo.setPro_img4(pro_img4.getOriginalFilename());
+		}
+		if(pro_img5.getOriginalFilename()== null){
+			pvo.setPro_img5("");	
+		}else{
+			pvo.setPro_img5(pro_img5.getOriginalFilename());
+		}
+		if(pro_img6.getOriginalFilename()== null){
+			pvo.setPro_img6("");	
+		}else{
+			pvo.setPro_img6(pro_img6.getOriginalFilename());
+		}
+		if(pro_img7.getOriginalFilename()== null){
+			pvo.setPro_img7("");	
+		}else{
+			pvo.setPro_img7(pro_img7.getOriginalFilename());
+		}
+		///////
+		System.out.println(pvo);
+		
+		int res = dao.getAddProduct(pvo);
+		///////
+		System.out.println(res);
+		
 		if(res>0){
 			byte[] in = pro_thum.getBytes();
-			File out = new File(path,bvo.getFile_name());
+			File out = new File(path,pvo.getPro_thum());
 			FileCopyUtils.copy(in, out);
 		}
 		
+		
 	} catch (Exception e) {
 	}
-		return new ModelAndView("redirect:/list.hb");
+		return new ModelAndView("redirect:/productlistpage.do");
 	}
 	
 	
@@ -139,6 +181,16 @@ public class HomeController {
 	public String newItem1(Model model) {
 		return "menu";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "productlistpage")  //for include
+	public String newItem2(Model model) {
+		return "productlistpage";
+	}
+	@RequestMapping(method = RequestMethod.POST, value = "productlistpage")  //for include
+	public String newItem3(Model model) {
+		return "productlistpage";
+	}
+
 	
 	
 	@RequestMapping(value = "/login.do")
@@ -202,20 +254,86 @@ public class HomeController {
 	
 	//bottom of topnav
 	
-	@RequestMapping(value = "/elec.do")
-	public ModelAndView elecpage(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("elecpage");
+	@RequestMapping(value = "/productlistpage.do")
+	public ModelAndView productList(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("productlistpage");
 		HttpSession session = request.getSession();
 		
-		List<PVO> eleclist = dao.getElecList(); 
-		mv.addObject("eleclist", eleclist);
-		System.out.println(eleclist);
-		int res = eleclist.size();
-		mv.addObject("eleclistsize", res);
+		List<PVO> productlist = dao.getProductList(); 
+		mv.addObject("productlist", productlist);
+		int res = productlist.size();
+		mv.addObject("productlistsize", res);
 		
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "/elec.do")
+	public ModelAndView elecpage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("productlistpage");
+		HttpSession session = request.getSession();
+		
+		List<PVO> productlist = dao.getElecList(); 
+		mv.addObject("productlist", productlist);
+		int res = productlist.size();
+		mv.addObject("productlistsize", res);
+		
+		
+		return mv;
+	}
+	@RequestMapping(value = "/acoustic.do")
+	public ModelAndView acousticpage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("productlistpage");
+		HttpSession session = request.getSession();
+		
+		List<PVO> productlist = dao.getAcousticList(); 
+		mv.addObject("productlist", productlist);
+		int res = productlist.size();
+		mv.addObject("productlistsize", res);
+		
+		
+		return mv;
+	}
+	@RequestMapping(value = "/effector.do")
+	public ModelAndView effectorpage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("productlistpage");
+		HttpSession session = request.getSession();
+		
+		List<PVO> productlist = dao.getEffectorList(); 
+		mv.addObject("productlist", productlist);
+		int res = productlist.size();
+		mv.addObject("productlistsize", res);
+		
+		
+		return mv;
+	}
+	@RequestMapping(value = "/amp.do")
+	public ModelAndView amppage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("productlistpage");
+		HttpSession session = request.getSession();
+		
+		List<PVO> productlist = dao.getAmpList(); 
+		mv.addObject("productlist", productlist);
+		int res = productlist.size();
+		mv.addObject("productlistsize", res);
+		
+		
+		return mv;
+	}
+	@RequestMapping(value = "/etc.do")
+	public ModelAndView etcpage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("productlistpage");
+		HttpSession session = request.getSession();
+		
+		List<PVO> productlist = dao.getEtcList(); 
+		mv.addObject("productlist", productlist);
+		int res = productlist.size();
+		mv.addObject("productlistsize", res);
+		
+		
+		return mv;
+	}
+	
 	
 	 
 	

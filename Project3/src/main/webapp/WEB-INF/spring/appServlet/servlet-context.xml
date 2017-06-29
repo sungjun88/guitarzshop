@@ -10,6 +10,11 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/acoustic/**" location="/resources/upload/acoustic/"/>
+	<resources mapping="/amp/**" location="/resources/upload/amp/"/>
+	<resources mapping="/effector/**" location="/resources/upload/effector/"/>
+	<resources mapping="/elec/**" location="/resources/upload/elec/"/>
+	<resources mapping="/etc/**" location="/resources/upload/etc/"/>
 	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

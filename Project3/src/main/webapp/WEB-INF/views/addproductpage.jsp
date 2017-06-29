@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function sendData(){
+	function addProduct(){
 		// 유효성 검사
 		for(var i=0 ; i<document.forms[0].elements.length ; i++){
 			if(document.forms[0].elements[i].value == ""){
@@ -98,7 +98,7 @@
 				<tr>
 					<td colspan="2">
 						<input type="button" value="등록"
-						onclick="sendData()"/>
+						onclick="addProduct()"/>
 					</td>
 				</tr>
 			</tbody>

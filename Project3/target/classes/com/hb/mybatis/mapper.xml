@@ -3,11 +3,6 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hb.mybatis.mapper">
-    <!-- 전체게시물의 수 -->
-	<select id="totalCount" resultType="int">
-		select count(*) from bbs_t 
-	</select>
-	
 	<!-- 로그인-->
 	<select id="login" resultType="com.hb.mybatis.UVO" parameterType="com.hb.mybatis.UVO">
 		select * from customer where cus_id = #{cus_id} and cus_pw = #{cus_pw}
@@ -20,10 +15,104 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{cus_addr},#{cus_recomm},#{cus_point})	
 	</insert>
 	
+	<!-- 전체상품리스트 -->
+    <select id="productlist" resultType="com.hb.mybatis.PVO">
+    select * from product
+    </select>
+    
 	<!-- 일렉리스트 -->
     <select id="eleclist" resultType="com.hb.mybatis.PVO">
     select * from product where pro_category = 'elec'
     </select>
+	<!-- 어쿠스틱리스트 -->
+    <select id="acousticlist" resultType="com.hb.mybatis.PVO">
+    select * from product where pro_category = 'acoustic'
+    </select>
+	<!-- 이펙터리스트 -->
+    <select id="effectorlist" resultType="com.hb.mybatis.PVO">
+    select * from product where pro_category = 'effector'
+    </select>
+	<!-- 앰프리스트 -->
+    <select id="amplist" resultType="com.hb.mybatis.PVO">
+    select * from product where pro_category = 'amp'
+    </select>
+	<!-- 기타리스트 -->
+    <select id="etclist" resultType="com.hb.mybatis.PVO">
+    select * from product where pro_category = 'etc'
+    </select>
+	
+	<!-- 제품 등록 -->
+	<insert id="getaddproduct" parameterType="com.hb.mybatis.PVO" >
+		insert into product values(product_seq.nextval,#{pro_category},
+		#{pro_code},#{pro_name},#{pro_company},#{pro_price},#{pro_saleprice},
+		#{pro_thum},#{pro_img1},#{pro_img2},#{pro_img3},#{pro_img4},#{pro_img5},
+		#{pro_img6},#{pro_img7},#{pro_content},sysdate,#{pro_quantity})	
+	</insert>
+	
+    <!-- 전체게시물의 수 -->
+	<select id="totalCount" resultType="int">
+		select count(*) from bbs_t 
+	</select>
+	
+	<!-- 원글리스트 -->
+	<select id="list" resultType="com.hb.mybatis.BVO" parameterType="Map">
+		select * from (
+		      select rownum r_num, a.* from (
+		         select * from bbs_t order by b_idx desc
+		      ) a
+		) where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 원글 삽입 -->
+	<insert id="insert" parameterType="com.hb.mybatis.BVO">
+		insert into bbs_t values(bbs_t_seq.nextval,#{subject},
+		#{writer},#{content},#{file_name},#{pwd},sysdate,#{ip},0)	
+	</insert>
+	
+	<!--원글 상세보기 -->
+	<select id="onelist" parameterType="String" resultType="com.hb.mybatis.BVO">
+			select * from bbs_t where b_idx = #{b_idx} 
+	</select>
+	
+	<!--원글 히트 업데이트  -->
+	<update id="hit" parameterType="com.hb.mybatis.BVO">
+		update bbs_t set hit = #{hit} where b_idx = #{b_idx}
+	</update>
+	
+	<!-- 원글 업데이트 -->
+	<update id="update" parameterType="com.hb.mybatis.BVO">
+		update bbs_t set subject=#{subject}, writer=#{writer}, content=#{content},
+		file_name=#{file_name} where b_idx = #{b_idx}
+	</update>
+	
+	<update id="update2" parameterType="com.hb.mybatis.BVO">
+		update bbs_t set subject=#{subject}, writer=#{writer}, content=#{content}
+		 where b_idx = #{b_idx}
+	</update>
+	
+	<!-- 원글 삭제 : 댓글이 있으면 댓글 먼저 삭제 해야 됨  -->
+	<delete id="ans_Delete_all" parameterType="String">
+		delete  from comment_t where b_idx = #{b_idx}
+	</delete>
+	<delete id="delete" parameterType="String">
+		delete from bbs_t where b_idx = #{b_idx}
+	</delete>
+	
+	<!-- 댓글 리스트 -->
+	<select id="ans_list" parameterType="String" resultType="com.hb.mybatis.CVO">
+		select * from comment_t where b_idx = #{b_idx} order by c_idx desc
+	</select>
+	
+	<!-- 댓글 삽입 -->
+	<insert id="ans_insert" parameterType="com.hb.mybatis.CVO">
+		insert into comment_t values(comment_t_seq.nextval, #{writer},
+		#{content},#{pwd},sysdate,#{ip},#{b_idx})
+	</insert>
+	
+	<!-- 댓글 삭제  -->
+	<delete id="ans_Delete" parameterType="String">
+		delete  from comment_t where c_idx = #{c_idx} 
+	</delete>
 	
 	
 </mapper>

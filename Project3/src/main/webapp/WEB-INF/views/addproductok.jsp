@@ -10,6 +10,7 @@
 </head>
 <body>
 <jsp:include page="${request.contextPath}/menu" flush="false" />
+<jsp:include page="${request.contextPath}/productlistpage" flush="false" />
 	
 
 

@@ -32,10 +32,39 @@ public class DAO {
 		return template.insert("join", uvo);
 	}
 	
+	// 전체상품리스트
+	public List<PVO> getProductList(){
+		return template.selectList("productlist");
+	}
 	// 일렉리스트
 	public List<PVO> getElecList(){
 		return template.selectList("eleclist");
 	}
+	// 어쿠스틱리스트
+	public List<PVO> getAcousticList(){
+		return template.selectList("acousticlist");
+	}
+	// 이펙터리스트
+	public List<PVO> getEffectorList(){
+		return template.selectList("effectorlist");
+	}
+	// 앰프리스트
+	public List<PVO> getAmpList(){
+		return template.selectList("amplist");
+	}
+	// 기타리스트
+	public List<PVO> getEtcList(){
+		return template.selectList("etclist");
+	}
+	
+	
+		
+	//상품등록
+	public int getAddProduct(PVO pvo){
+		System.out.println(pvo);
+		return template.insert("getaddproduct", pvo);
+	}
+	
 	
 	//원글 삽입
 	public int getInsert(BVO bvo){

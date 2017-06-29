@@ -16,6 +16,9 @@
 </script>
 <body>
 <jsp:include page="${request.contextPath}/menu" flush="false" />
+<b>안녕? 제발좀되라</b>
+
+
 
 </body>
 </html>
