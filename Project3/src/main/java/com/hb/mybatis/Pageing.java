@@ -5,7 +5,7 @@ public class Pageing {
     int nowPage = 1 ; // 현재페이지
     int nowBlock =1 ; // 현재 블록
     int totalRecord = 0 ; // 총 게시물의 수 (원글의 수)
-    int numPerPage = 3 ; // 한 페이지에 게시되는 원글의 수
+    int numPerPage = 5 ; // 한 페이지에 게시되는 원글의 수
     int pagePerBlock = 3 ; // 블록당 표현되는 페이지의 수
     int totalPage = 0 ; // 전체 페이지의 수
     int totalBlock = 0 ; // 전체 블록의 수
