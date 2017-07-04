@@ -36,29 +36,20 @@ public class DAO {
 	public List<PVO> getProductList(){
 		return template.selectList("productlist");
 	}
-	// 일렉리스트
-	public List<PVO> getElecList(){
-		return template.selectList("eleclist");
+	// 특정상품리스트
+	public List<PVO> getProductOneList(String protype){
+		return template.selectList("productonelist", protype);
 	}
-	// 어쿠스틱리스트
-	public List<PVO> getAcousticList(){
-		return template.selectList("acousticlist");
-	}
-	// 이펙터리스트
-	public List<PVO> getEffectorList(){
-		return template.selectList("effectorlist");
-	}
-	// 앰프리스트
-	public List<PVO> getAmpList(){
-		return template.selectList("amplist");
-	}
-	// 기타리스트
-	public List<PVO> getEtcList(){
-		return template.selectList("etclist");
+	
+	// 하나 보기
+	public PVO getContent(String pro_no){
+		return template.selectOne("getcontent", pro_no);
 	}
 	
 	
 		
+	
+	
 	//상품등록
 	public int getAddProduct(PVO pvo){
 		System.out.println(pvo);

@@ -16,12 +16,17 @@
 <title>Insert title here</title>
 </head>
 <style>
+
+ @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
 * {
 	box-sizing: border-box;
+	font-family: 'Hanna';
 }
 
 body {
-	margin: 0;
+	margin-bottom: 100px;
+	
 }
 
 a:visited {
@@ -31,7 +36,7 @@ a:visited {
 /* 상단메뉴 */
 .topest {
 	overflow: hidden;
-	background-color: #BE0E0E;
+	background-color: #DB0000;
 	font-size: 17px;
 	width: 100%;
 	font-weight: bold;
@@ -42,6 +47,7 @@ a:visited {
 	text-decoration: none;
 	padding: 10px;
 	display: block;
+	font-size: 25px;
 }
 
 .topest a:link, a:visited {
@@ -52,15 +58,16 @@ a:visited {
 
 .banner {
 	overflow: hidden;
-	background-color: #BE0E0E;
-	font-size: 50px;
+	background-color: #DB0000;
+	font-size: 70px;
 	width: 100%;
 	text-align: center;
+	color: white;
 }
 
 .topnav {
 	overflow: hidden;
-	background-color: #BE0E0E;
+	background-color: #DB0000;
 }
 
 .topnav a {
@@ -72,6 +79,7 @@ a:visited {
 	text-decoration: none;
 	font-size: 17px;
 	font-weight: bold;
+	font-size: 25px;
 }
 
 .topnav a:hover {
@@ -147,12 +155,11 @@ a:visited {
 	}
 </script>
 <body>
-	${cus_id}
 	<div class="topest">
 		<c:choose>
 			<c:when test="${login == 1}">
 				<c:choose>
-					<c:when test="${cus_id == admin}">
+					<c:when test="${uvo.cus_id=='admin'}">
 						<b>${uvo.cus_name}님 환영합니다.</b>
 						<a href="adminpage.do">관리자페이지</a>
 						<a href="logout.do">로그아웃</a>
@@ -178,11 +185,13 @@ a:visited {
 	</div>
 
 	<div class="topnav" id="myTopnav">
-		<a href="main.do">HOME</a> <a href="productlistpage.do">ALL ITEMS</a><a href="elec.do">ELEC</a> <a href="acoustic.do">ACOUSTIC</a>
-		<a href="effector.do">EFFECTOR</a> <a href="amp.do">AMP</a> <a href="etc.do">ETC</a>
+		<a href="main.do">HOME</a> <a href="productlistpage.do">ALL ITEMS</a><a href="productlistpage.do?protype=elec">ELEC</a> <a href="productlistpage.do?protype=acoustic">ACOUSTIC</a>
+		<a href="productlistpage.do?protype=effector">EFFECTOR</a> <a href="productlistpage.do?protype=amp">AMP</a> <a href="productlistpage.do?protype=etc">ETC</a>
 		<a href="list.hb">Q&A</a>
 		<a href="javascript:void(0);" style="font-size: 15px;" class="icon"
 			onclick="myFunction()">&#9776;</a>
+	</div>
+	<div style="width:100%; height:100px">
 	</div>
 
 </body>

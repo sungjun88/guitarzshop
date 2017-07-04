@@ -32,41 +32,22 @@ fieldset {
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/menu" flush="false" />
-	${login }
+	${login}
+	<div align= "center" style="">
 	<c:choose>
 		<c:when test="${login == -1}">
-			<b>ID와 비밀번호를 확인해주세요</b>
-			<fieldset>
-				<legend>LOG IN</legend>
-				<form method="post">
-					ID : <input type="text" name="cus_id"><br> PW : <input
-						type="text" name="cus_pw"><br> <input type="button"
-						value="LOGIN" onclick="login_go(this.form)">
-				</form>
-			</fieldset>
+			<b style="font-size: 30px">ID와 비밀번호를 확인해주세요</b>
 		</c:when>
-		<c:when test="${login == 1}">
-			<fieldset>
-				<legend>LOG IN</legend>
-				<form method="post">
-					ID : <input type="text" name="cus_id"><br> PW : <input
-						type="text" name="cus_pw"><br> <input type="button"
-						value="LOGIN" onclick="login_go(this.form)">
-				</form>
-			</fieldset>
-		</c:when>
-		<c:otherwise>
-			<fieldset>
-				<legend>LOG IN</legend>
-				<form method="post">
-					ID : <input type="text" name="cus_id"><br> PW : <input
-						type="text" name="cus_pw"><br> <input type="button"
-						value="LOGIN" onclick="login_go(this.form)">
-				</form>
-			</fieldset>
-		</c:otherwise>
 	</c:choose>
-
+	<fieldset>
+				<legend>LOG IN</legend>
+				<form method="post">
+					<input type="text" name="cus_id" placeholder="ID"><br><input
+						type="text" name="cus_pw" placeholder="PW"><br> <input type="button"
+						value="LOGIN" onclick="login_go(this.form)">
+				</form>
+			</fieldset>
+	</div>
 
 </body>
 </html>

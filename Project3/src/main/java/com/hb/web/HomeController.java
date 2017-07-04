@@ -258,8 +258,15 @@ public class HomeController {
 	public ModelAndView productList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("productlistpage");
 		HttpSession session = request.getSession();
+		String protype = request.getParameter("protype");
+		List<PVO> productlist;
 		
-		List<PVO> productlist = dao.getProductList(); 
+		if(protype==null){
+			productlist = dao.getProductList(); 
+		}else {
+			productlist = dao.getProductOneList(protype); 
+		}
+		
 		mv.addObject("productlist", productlist);
 		int res = productlist.size();
 		mv.addObject("productlistsize", res);
@@ -267,78 +274,15 @@ public class HomeController {
 		
 		return mv;
 	}
-	
-	@RequestMapping(value = "/elec.do")
-	public ModelAndView elecpage(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("productlistpage");
+		
+	@RequestMapping(value = "/contentpage.do")
+	public ModelAndView contentPage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("contentpage");
 		HttpSession session = request.getSession();
 		
-		List<PVO> productlist = dao.getElecList(); 
-		mv.addObject("productlist", productlist);
-		int res = productlist.size();
-		mv.addObject("productlistsize", res);
-		
+		PVO content = dao.getContent(request.getParameter("proidx")	); 
+		mv.addObject("pvo", content);
 		
 		return mv;
 	}
-	@RequestMapping(value = "/acoustic.do")
-	public ModelAndView acousticpage(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("productlistpage");
-		HttpSession session = request.getSession();
-		
-		List<PVO> productlist = dao.getAcousticList(); 
-		mv.addObject("productlist", productlist);
-		int res = productlist.size();
-		mv.addObject("productlistsize", res);
-		
-		
-		return mv;
-	}
-	@RequestMapping(value = "/effector.do")
-	public ModelAndView effectorpage(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("productlistpage");
-		HttpSession session = request.getSession();
-		
-		List<PVO> productlist = dao.getEffectorList(); 
-		mv.addObject("productlist", productlist);
-		int res = productlist.size();
-		mv.addObject("productlistsize", res);
-		
-		
-		return mv;
-	}
-	@RequestMapping(value = "/amp.do")
-	public ModelAndView amppage(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("productlistpage");
-		HttpSession session = request.getSession();
-		
-		List<PVO> productlist = dao.getAmpList(); 
-		mv.addObject("productlist", productlist);
-		int res = productlist.size();
-		mv.addObject("productlistsize", res);
-		
-		
-		return mv;
-	}
-	@RequestMapping(value = "/etc.do")
-	public ModelAndView etcpage(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("productlistpage");
-		HttpSession session = request.getSession();
-		
-		List<PVO> productlist = dao.getEtcList(); 
-		mv.addObject("productlist", productlist);
-		int res = productlist.size();
-		mv.addObject("productlistsize", res);
-		
-		
-		return mv;
-	}
-	
-	
-	 
-	
-	
-	
-	
-	
 }

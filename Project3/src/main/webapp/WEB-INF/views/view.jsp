@@ -8,16 +8,16 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#bbs table {
-	    width:580px;
+	    width:80%;
 	    margin-left:10px;
 	    border:1px solid black;
 	    border-collapse:collapse;
-	    font-size:14px;
-	    
+	    font-size:20px;
+	    margin: auto;
 	}
 	
 	#bbs table caption {
-	    font-size:20px;
+	    font-size:30px;
 	    font-weight:bold;
 	    margin-bottom:10px;
 	}
@@ -38,8 +38,9 @@
 	.writer {width:20%}
 	.reg {width:20%}
 	.hit {width:15%}
-	.title{background:lightsteelblue}
-	.odd {background:silver}
+	.title{background:#BE0E0E}
+	.odd {background:#BE0E0E}
+	
 </style>
 <script type="text/javascript">
 	function modify_go(f) {
@@ -62,11 +63,11 @@
 <jsp:include page="${request.contextPath}/menu" flush="false" />
 	<div id="bbs">
 	<form method="post" >
-		<table summary="게시판 글쓰기">
+		<table summary="Q&A 글쓰기">
 			<caption>게시판 글쓰기</caption>
 			<tbody>
 				<tr>
-					<th>제목:</th>
+					<th style="width: 10%">제목:</th>
 					<td>${bvo.subject }</td>
 				</tr>
 				<tr>
@@ -102,16 +103,7 @@
 		</table>
 	</form>
 	<br /><br />
-	<form method="post" action="ans_write.hb">
-		<p>이름:<input type="text" name="writer"/></p>
-		<p>내용:<textarea rows="4" cols="55" name="content"></textarea></p>
-		<p>비밀번호:<input type="password" name="pwd"/></p>
-		<input type="hidden" name="b_idx" value="${bvo.b_idx}">
-		<input type="hidden" name="cPage" value="${cPage}" />
-		<input type="submit" value="저장하기"/> 
-	</form>
-	<hr/>
-		<div>
+		<div style="font-size: 20px; padding-left: 10%;">
 			<c:choose>
 				<c:when test="${empty c_list}">
 					<h3><li>댓글없음</li></h3>
@@ -128,13 +120,26 @@
 						<input type="hidden" name="b_idx" value="${k.b_idx}">
 						<input type="hidden" name="cPage" value="${cPage}" />
 						<input type="submit" value="댓글삭제" />
-						<hr />
+						<hr/>
+						<hr/>
+						<hr/>
+						<hr/>
 					</form>	
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</div>
+	<form method="post" action="ans_write.hb">
+		<div style="font-size: 20px; padding-left: 10%;" >
+		<h2>댓글달기</h2>
+		<p>이름:<input type="text" name="writer" /></p>
+		<p>내용:<textarea rows="4" cols="55" name="content" ></textarea></p>
+		<p>비밀번호:<input type="password" name="pwd" /></p>
+		<input type="hidden" name="b_idx" value="${bvo.b_idx}">
+		<input type="hidden" name="cPage" value="${cPage}" />
+		<input type="submit" value="저장하기"/>
+		</div>
+	</form>
 	</div>
 </body>
 </html>
-	

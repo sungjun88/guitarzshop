@@ -7,6 +7,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+<style type="text/css">
+.dv{
+	font-size: 30px;
+	width:  80%;
+	margin: auto;
+}
+
+</style>
 <script type="text/javascript">
 	function join_go(f) {
 		/* 유효성 검사 */////////////////length 들이 안됨 나중에 수정요함 ///////////////////
@@ -67,6 +75,7 @@
 			</script>
 		</c:when>
 	</c:choose>
+	<div class="dv">
 	<fieldset>
 		<legend>JOIN</legend>
 		<form method="post">
@@ -83,7 +92,7 @@
 				value="JOIN" onclick="join_go(this.form)">
 		</form>
 	</fieldset>
-
+	</div>
 
 
 </body>

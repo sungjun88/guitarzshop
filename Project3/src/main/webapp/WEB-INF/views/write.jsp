@@ -8,18 +8,18 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#bbs table {
-	    width:580px;
-	    margin-left:10px;
-	    border:1px solid black;
+	    width:80%;
+	    margin: auto;
+	    border:2px solid black;
 	    border-collapse:collapse;
-	    font-size:14px;
+	    font-size:20px;
 	    
 	}
 	
 	#bbs table caption {
-	    font-size:20px;
+	    font-size:30px;
 	    font-weight:bold;
-	    margin-bottom:10px;
+	    margin-bottom:20px;
 	}
 	
 	#bbs table th {
@@ -39,9 +39,9 @@
 	.writer {width:20%}
 	.reg {width:20%}
 	.hit {width:15%}
-	.title{background:lightsteelblue}
+	.title{background:#DB0000}
 	
-	.odd {background:silver}
+	.odd {background:#DB0000}
 	
 		
 </style>
@@ -69,27 +69,27 @@
 	<form method="post" 
 	encType="multipart/form-data">
 		<table summary="게시판 글쓰기">
-			<caption>게시판 글쓰기</caption>
+			<caption>Q & A</caption>
 			<tbody>
 				<tr>
-					<th>제목:</th>
+					<th>제목</th>
 					<td><input type="text" name="subject" size="45"/></td>
 				</tr>
 				<tr>
-					<th>이름:</th>
+					<th>이름</th>
 					<td><input type="text" name="writer" size="12" value="${uvo.cus_name}"/></td>
 				</tr>
 				<tr>
-					<th>내용:</th>
+					<th>내용</th>
 					<td><textarea name="content" cols="50" 
 							rows="8"></textarea></td>
 				</tr>
 				<tr>
-					<th>첨부파일:</th>
+					<th>첨부파일</th>
 					<td><input type="file" name="file_name"/></td>
 				</tr>
 				<tr>
-					<th>비밀번호:</th>
+					<th>비밀번호</th>
 					<td><input type="password" name="pwd" size="12"/></td>
 				</tr>
 				<tr>

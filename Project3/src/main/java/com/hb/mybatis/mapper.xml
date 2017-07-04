@@ -20,26 +20,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select * from product
     </select>
     
-	<!-- 일렉리스트 -->
-    <select id="eleclist" resultType="com.hb.mybatis.PVO">
-    select * from product where pro_category = 'elec'
+	<!-- 특정상품리스트 -->
+    <select id="productonelist" resultType="com.hb.mybatis.PVO">
+    select * from product where pro_category = #{protype}
     </select>
-	<!-- 어쿠스틱리스트 -->
-    <select id="acousticlist" resultType="com.hb.mybatis.PVO">
-    select * from product where pro_category = 'acoustic'
-    </select>
-	<!-- 이펙터리스트 -->
-    <select id="effectorlist" resultType="com.hb.mybatis.PVO">
-    select * from product where pro_category = 'effector'
-    </select>
-	<!-- 앰프리스트 -->
-    <select id="amplist" resultType="com.hb.mybatis.PVO">
-    select * from product where pro_category = 'amp'
-    </select>
-	<!-- 기타리스트 -->
-    <select id="etclist" resultType="com.hb.mybatis.PVO">
-    select * from product where pro_category = 'etc'
-    </select>
+	
 	
 	<!-- 제품 등록 -->
 	<insert id="getaddproduct" parameterType="com.hb.mybatis.PVO" >
@@ -48,6 +33,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{pro_thum},#{pro_img1},#{pro_img2},#{pro_img3},#{pro_img4},#{pro_img5},
 		#{pro_img6},#{pro_img7},#{pro_content},sysdate,#{pro_quantity})	
 	</insert>
+	
+	<!-- 상세보기 -->
+    <select id="getcontent" resultType="com.hb.mybatis.PVO" parameterType="String">
+    	select * from product where pro_no = #{pro_no}
+    </select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
     <!-- 전체게시물의 수 -->
 	<select id="totalCount" resultType="int">
