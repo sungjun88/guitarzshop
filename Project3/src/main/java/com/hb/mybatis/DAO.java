@@ -43,6 +43,7 @@ public class DAO {
 	
 	// 하나 보기
 	public PVO getContent(String pro_no){
+		System.out.println(pro_no+"dao");
 		return template.selectOne("getcontent", pro_no);
 	}
 	

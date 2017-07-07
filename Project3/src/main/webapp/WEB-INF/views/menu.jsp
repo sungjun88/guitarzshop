@@ -177,7 +177,7 @@ a:visited {
 		
 
 		<a href="joinPage.do">회원가입</a> <a href="#contact">마이페이지</a> <a href="#about">주문/배송</a>
-		<a href="#about">장바구니</a>
+		<a href="cartpage.do">장바구니</a>
 	</div>
 
 	<div class="banner">

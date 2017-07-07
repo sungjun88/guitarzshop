@@ -21,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hb.mybatis.BVO;
+import com.hb.mybatis.CART;
 import com.hb.mybatis.DAO;
+import com.hb.mybatis.OIVO;
 import com.hb.mybatis.PVO;
 import com.hb.mybatis.UVO;
 
@@ -275,6 +277,8 @@ public class HomeController {
 		return mv;
 	}
 		
+	//contentpage
+	
 	@RequestMapping(value = "/contentpage.do")
 	public ModelAndView contentPage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("contentpage");
@@ -285,4 +289,29 @@ public class HomeController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "/cart.do")
+	public ModelAndView cart(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("contentpage");
+		HttpSession session = request.getSession();
+		CART cart = new CART();
+		String prono = request.getParameter("prono");
+		String procount = request.getParameter("procount");
+		String saleprice = request.getParameter("saleprice");
+		String price = request.getParameter("price");
+		List<OIVO> cartlist = cart.addProduct(prono, Integer.parseInt(procount),saleprice,price);
+		session.setAttribute("cartlist", cartlist);
+		
+		PVO content = dao.getContent(request.getParameter("prono"));
+		mv.addObject("pvo", content);
+		return mv;
+	}
+
+	
+	@RequestMapping(value = "/cartpage.do")
+	public ModelAndView cartPage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("cartpage");
+		return mv;
+	}
+	
 }
