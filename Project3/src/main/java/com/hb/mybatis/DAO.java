@@ -7,8 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 
 // DB관련된 처리하는 클래스
+	
+
 public class DAO {
 	private SqlSessionTemplate template;
+	public DAO(){ }
 	public SqlSessionTemplate getTemplate() {
 		return template;
 	}
@@ -43,7 +46,6 @@ public class DAO {
 	
 	// 하나 보기
 	public PVO getContent(String pro_no){
-		System.out.println(pro_no+"dao");
 		return template.selectOne("getcontent", pro_no);
 	}
 	

@@ -39,6 +39,11 @@ fieldset {
 			<b style="font-size: 30px">ID와 비밀번호를 확인해주세요</b>
 		</c:when>
 	</c:choose>
+	<c:choose>
+		<c:when test="${login == null}">
+			<b style="font-size: 30px">로그인 후 이용해주세요</b>
+		</c:when>
+	</c:choose>
 	<fieldset>
 				<legend>LOG IN</legend>
 				<form method="post">

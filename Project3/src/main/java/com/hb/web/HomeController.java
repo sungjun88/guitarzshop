@@ -2,6 +2,7 @@
 
 package com.hb.web;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -295,22 +296,48 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("contentpage");
 		HttpSession session = request.getSession();
 		CART cart = new CART();
+		cart.setDao(dao);
 		String prono = request.getParameter("prono");
 		String procount = request.getParameter("procount");
 		String saleprice = request.getParameter("saleprice");
 		String price = request.getParameter("price");
-		List<OIVO> cartlist = cart.addProduct(prono, Integer.parseInt(procount),saleprice,price);
+		List<OIVO> sessionlist = (List<OIVO>)session.getAttribute("cartlist");
+		if(sessionlist == null) sessionlist = new ArrayList<>();
+		List<OIVO> cartlist = cart.addProduct(prono, Integer.parseInt(procount),saleprice,price,sessionlist);
 		session.setAttribute("cartlist", cartlist);
 		
 		PVO content = dao.getContent(request.getParameter("prono"));
 		mv.addObject("pvo", content);
+				
+		if(request.getParameter("retVal").equals("true")){
+			session = request.getSession();
+			session.getAttribute("cart");
+			mv = new ModelAndView("cartpage");
+			return mv;
+		}
 		return mv;
 	}
 
 	
 	@RequestMapping(value = "/cartpage.do")
 	public ModelAndView cartPage(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.getAttribute("cart");
 		ModelAndView mv = new ModelAndView("cartpage");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/profilePage.do")
+	public ModelAndView profilePage(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		ModelAndView mv;
+		String login = (String)request.getParameter("login");
+		
+		if(login == null){
+			mv = new ModelAndView("loginpage");
+		}else{
+			mv = new ModelAndView("profilePage");
+		}
 		return mv;
 	}
 	

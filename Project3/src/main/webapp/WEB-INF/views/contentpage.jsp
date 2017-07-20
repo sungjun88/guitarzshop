@@ -51,17 +51,10 @@
 	}
 	
 	function cart_go(f){
+		var retVal = confirm("상품을 카트에 담았습니다. 카트로 이동합니까?");		
+		f.action="cart.do?retVal="+retVal;
+		f.submit();
 		
-	
-		var retVal = confirm("상품을 카트에 담았습니다. 카트로 이동합니까?");
-		   if( retVal == true ){
-		      location.href="cartpage.do"
-		    	f.action="cart.do";
-				f.submit();
-		   }else{
-			   f.action="cart.do";
-				f.submit();
-		   }
 	} 
 </script>
 

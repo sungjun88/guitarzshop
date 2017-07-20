@@ -4,12 +4,13 @@ public class OIVO {
 	private String oi_no, ord_no, pro_no;
 	private int  oi_procount, oi_price, oi_saleprice;
 	private int oi_totalprice;
+	private PVO oi_pvo;
 	
 	public OIVO() {	}
 	
 
 	
-	public OIVO(String oi_no, String ord_no, String pro_no, int oi_procount, int oi_price, int oi_saleprice, int oi_totalprice) {
+	public OIVO(String oi_no, String ord_no, String pro_no, int oi_procount, int oi_price, int oi_saleprice, int oi_totalprice, PVO oi_pvo) {
 		super();
 		this.oi_no = oi_no;
 		this.ord_no = ord_no;
@@ -18,6 +19,17 @@ public class OIVO {
 		this.oi_price = oi_price;
 		this.oi_saleprice = oi_saleprice;
 		this.oi_totalprice = oi_totalprice;
+		this.oi_pvo = oi_pvo;
+	}
+
+
+	public PVO getOi_pvo() {
+		return oi_pvo;
+	}
+
+
+	public void setOi_pvo(PVO oi_pvo) {
+		this.oi_pvo = oi_pvo;
 	}
 
 
@@ -77,12 +89,19 @@ public class OIVO {
 		this.oi_totalprice = oi_totalprice;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "OIVO [oi_no=" + oi_no + ", ord_no=" + ord_no + ", pro_no=" + pro_no + ", oi_procount=" + oi_procount
 				+ ", oi_price=" + oi_price + ", oi_saleprice=" + oi_saleprice + ", oi_totalprice=" + oi_totalprice
-				+ "]";
+				+ ", oi_pvo=" + oi_pvo + "]";
 	}
+
+
+
+	
+	
 	
 	
 }
