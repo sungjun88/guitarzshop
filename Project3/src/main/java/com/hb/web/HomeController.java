@@ -205,10 +205,13 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		if(uvo2!=null){
 			session.setAttribute("uvo", uvo2);
+			String pwhint = uvo2.getCus_pw().charAt(0)+"";
+			for (int i = 1; i < uvo2.getCus_pw().length(); i++) pwhint = pwhint+"*";
+			session.setAttribute("pwhint", pwhint);
 			session.setAttribute("login", 1);			
 			return new ModelAndView("main");
 		}else{
-			session.setAttribute("login", -1);			
+			request.setAttribute("login", -1);			
 			return new ModelAndView("loginpage");
 		}
 		
@@ -331,12 +334,19 @@ public class HomeController {
 	public ModelAndView profilePage(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		ModelAndView mv;
-		String login = (String)request.getParameter("login");
-		
-		if(login == null){
-			mv = new ModelAndView("loginpage");
+		String login;
+		if(session.getAttribute("login") == null){
+			login = "";
 		}else{
+			login = session.getAttribute("login").toString();
+		}
+		if(login.equals("1")){
+			
+			
 			mv = new ModelAndView("profilePage");
+		}else{
+			request.setAttribute("login2", true);
+			mv = new ModelAndView("loginpage");
 		}
 		return mv;
 	}

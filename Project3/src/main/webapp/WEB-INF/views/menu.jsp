@@ -175,8 +175,12 @@ a:visited {
 			</c:otherwise>
 		</c:choose>
 		
-
-		<a href="joinPage.do">회원가입</a> <a href="profilePage.do">마이페이지</a> <a href="#about">주문/배송</a>
+		<c:choose>
+			<c:when test="${login != 1}">
+				<a href="joinPage.do">회원가입</a> 
+			</c:when>
+		</c:choose>
+		<a href="profilePage.do">마이페이지</a> <a href="#about">주문/배송</a>
 		<a href="cartpage.do">장바구니</a>
 	</div>
 

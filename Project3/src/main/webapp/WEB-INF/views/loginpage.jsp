@@ -32,7 +32,6 @@ fieldset {
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/menu" flush="false" />
-	${login}
 	<div align= "center" style="">
 	<c:choose>
 		<c:when test="${login == -1}">
@@ -40,8 +39,12 @@ fieldset {
 		</c:when>
 	</c:choose>
 	<c:choose>
-		<c:when test="${login == null}">
-			<b style="font-size: 30px">로그인 후 이용해주세요</b>
+		<c:when test="${login != 1}">
+			<c:choose>
+				<c:when test="${login2 == true}">
+					<b style="font-size: 30px">로그인 후 이용해주세요</b>
+				</c:when>
+			</c:choose>
 		</c:when>
 	</c:choose>
 	<fieldset>
