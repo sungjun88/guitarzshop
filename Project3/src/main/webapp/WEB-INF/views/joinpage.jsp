@@ -63,6 +63,10 @@
 		f.action = "join.do";
 		f.submit();
 	}
+	
+	function dup_id_go(f){
+		
+	}
 </script>
 </head>
 <body>
@@ -80,7 +84,7 @@
 		<legend>JOIN</legend>
 		<form method="post">
 			이름 : <input type="text" name="cus_name"><br> ID : <input
-				type="text" name="cus_id"><br> PW : <input type="password"
+				type="text" name="cus_id"><input type="button" value="중복확인" onclick="dup_id_go(this.form)"><br> PW : <input type="password"
 				name="cus_pw"><br> PW확인 : <input type="password"
 				name="cus_pw2"><br> 생년월일 : <input type="text"
 				name="cus_birth"><br> 성별 : <input type="text"

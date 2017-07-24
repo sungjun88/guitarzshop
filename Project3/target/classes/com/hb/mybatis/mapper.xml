@@ -8,6 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from customer where cus_id = #{cus_id} and cus_pw = #{cus_pw}
 	</select>
 	
+	<!-- 중복아이디가입방지-->
+	<select id="dupjoin" resultType="com.hb.mybatis.UVO" parameterType="com.hb.mybatis.UVO">
+		select * from customer where cus_id = #{cus_id}
+	</select>
+	
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="com.hb.mybatis.UVO">
 		insert into customer values(customer_seq.nextval,#{cus_name},

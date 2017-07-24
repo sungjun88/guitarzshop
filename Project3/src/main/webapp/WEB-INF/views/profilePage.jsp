@@ -19,6 +19,31 @@ input [type:text] {
 	 border : 0px;
 }
 </style>
+<script type="text/javascript">
+
+
+	function modi_go(f){
+		if (f.cus_id.value.length < 6) {
+			alert("ID는 6자 이상 적어주세요");
+			f.cus_id.focus();
+			return;
+		} else if (f.cus_pw.value.length < 6) {
+			alert("비밀번호는 6자 이상 적어주세요");
+			f.cus_pw.focus();
+			return;
+		} else if (f.cus_pw.value != f.cus_pw2.value) {
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
+			f.cus_pw2.focus();
+			return;
+		} else{
+			var res = confirm("수정하시겠습니까?");
+			if(res == true) {
+				f.action = "modify.do";
+				f.submit;
+			}
+		}
+	}
+</script>
 </head>
 <body>
 <jsp:include page="${request.contextPath}/menu" flush="false" />
@@ -57,6 +82,8 @@ input [type:text] {
 		<td>${uvo.cus_addr}</td>
 	</tr>
 </table>
+
+<form method="post">
 <div class="container">
   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">수정</button>
@@ -75,40 +102,45 @@ input [type:text] {
           <table>
 	<tr>
 		<td style="min-width: 100px">ID</td>
-		<td> <input type="text" value="${uvo.cus_id}"/> </td>
+		<td> <input type="text" value="${uvo.cus_id}" name="cus_id" disabled="disabled"/> </td>
 	</tr>
 	<tr>
 		<td>PW</td>
-		<td> <input type="password" value="${uvo.cus_pw}" /> </td>
+		<td> <input type="password" value="${uvo.cus_pw}" name="cus_pw"/> </td>
+	</tr>
+	<tr>
+		<td>PW확인</td>
+		<td> <input type="password" value="${uvo.cus_pw}" name="cus_pw2"/> </td>
 	</tr>
 	<tr>
 		<td>이름</td>
-		<td> <input type="text" value="${uvo.cus_name}" /> </td>
+		<td> <input type="text" value="${uvo.cus_name}" name="cus_name"/> </td>
 	</tr>
 	<tr>
 		<td>생년월일</td>
-		<td> <input type="text" value="${uvo.cus_birth}" /> </td>
+		<td> <input type="text" value="${uvo.cus_birth}" name="cus_birth"/> </td>
 	</tr>
 	<tr>
 		<td>성별</td>
-		<td> <input type="text" value="${uvo.cus_gender}" /> </td>
+		<td> <input type="text" value="${uvo.cus_gender}" name="cus_gender"/> </td>
 	</tr>
 	<tr>
 		<td>E-MAIL</td>
-		<td> <input type="text" value="${uvo.cus_email}" /> </td>
+		<td> <input type="text" value="${uvo.cus_email}" name="cus_email"/> </td>
 	</tr>
 	<tr>
 		<td>PHONE</td>
-		<td> <input type="text" value="${uvo.cus_phone}" /> </td>
+		<td> <input type="text" value="${uvo.cus_phone}" name="cus_phone"/> </td>
 	</tr>
 	<tr>
 		<td>주소</td>
-		<td> <input type="text" value="${uvo.cus_addr}" /> </td>
+		<td> <input type="text" value="${uvo.cus_addr}" name="cus_addr"/> </td>
 	</tr>
 </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" onclick="modi_go(this.form)">수정</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
         </div>
       </div>
       
@@ -116,5 +148,6 @@ input [type:text] {
   </div>
   
 </div>
+</form>
 
 </html>

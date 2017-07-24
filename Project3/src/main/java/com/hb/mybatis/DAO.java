@@ -29,6 +29,11 @@ public class DAO {
 	public UVO getLogin(UVO uvo){
 		return template.selectOne("login", uvo);
 	}
+	
+	//중복아이디 가입 방지
+	public UVO getDupJoin(UVO uvo){
+		return template.selectOne("dupjoin", uvo);
+	}
 		
 	// 회원가입
 	public int getJoin(UVO uvo){
