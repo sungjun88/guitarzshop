@@ -23,23 +23,24 @@ input [type:text] {
 
 
 	function modi_go(f){
-		if (f.cus_id.value.length < 6) {
-			alert("ID는 6자 이상 적어주세요");
-			f.cus_id.focus();
-			return;
-		} else if (f.cus_pw.value.length < 6) {
-			alert("비밀번호는 6자 이상 적어주세요");
-			f.cus_pw.focus();
-			return;
-		} else if (f.cus_pw.value != f.cus_pw2.value) {
+	//	if (f.cus_id.value.length < 6) {
+	//		alert("ID는 6자 이상 적어주세요");
+	//		f.cus_id.focus();
+	//		return;
+	//	} else if (f.cus_pw.value.length < 6) {
+	//		alert("비밀번호는 6자 이상 적어주세요");
+	//		f.cus_pw.focus();
+	//		return;
+	//	} else 
+		if (f.cus_pw.value != f.cus_pw2.value) {
 			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
 			f.cus_pw2.focus();
 			return;
 		} else{
 			var res = confirm("수정하시겠습니까?");
 			if(res == true) {
-				f.action = "modify.do";
-				f.submit;
+				f.action = "userModify.do";
+				f.submit();
 			}
 		}
 	}
@@ -48,6 +49,13 @@ input [type:text] {
 <body>
 <jsp:include page="${request.contextPath}/menu" flush="false" />
 </body>
+	<c:choose>
+		<c:when test="${userModiOk == 1}">
+			<script type="text/javascript">
+				alert("회원정보 수정 성공");
+			</script>
+		</c:when>
+	</c:choose>
 <table>
 	<tr>
 		<td style="min-width: 100px">ID</td>
@@ -102,7 +110,7 @@ input [type:text] {
           <table>
 	<tr>
 		<td style="min-width: 100px">ID</td>
-		<td> <input type="text" value="${uvo.cus_id}" name="cus_id" disabled="disabled"/> </td>
+		<td> <input type="text" value="${uvo.cus_id}" name="cus_id"/> </td>
 	</tr>
 	<tr>
 		<td>PW</td>

@@ -49,12 +49,13 @@ table{
 
 </style>
 <script type="text/javascript">
-
+	
 </script>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/menu" flush="false" />
 
+	<form method="post">
 	<table>
 		<c:choose>
 			<c:when test="${empty cartlist}">
@@ -68,22 +69,26 @@ table{
 					<th style="text-align: center">수량</th>
 					<th style="text-align: center">상품원가</th>
 					<th style="text-align: center">판매가</th>
+					<th style="text-align: center"></th>
 				</tr>
-				<c:forEach items="${cartlist }" var="k">
+				<c:forEach items="${cartlist }" var="k" varStatus="vs">
 					<tr>
 						<td id="pimg"><img class="proimg" alt="사진이없습니다." src="${k.oi_pvo.pro_category}/${k.oi_pvo.pro_thum }" style="width:50px; height:50px"></td>
 						<td id="pname">${k.oi_pvo.pro_name}</td>
-						<td id="pcount">${k.oi_procount }</td>
+						<td id="pcount"><input type="number" value="${k.oi_procount }" /></td>
 						<td id="pprice"><b><fmt:formatNumber value="${k.oi_price }"
 											pattern="###,###,###" /> 원</b></td>
 						<td id="psale"><b><fmt:formatNumber value="${k.oi_saleprice }"
 											pattern="###,###,###" /> 원</b></td>
+						<td><a href="oi_pro_delete.do?prolist_idx=${vs.index}">x</a></td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		
 	</table>
+	</form>
+	
+	
 	<table>
 		<tr>
 			<th>총 수량</th>

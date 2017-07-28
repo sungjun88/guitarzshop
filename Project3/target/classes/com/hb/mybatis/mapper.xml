@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 중복아이디가입방지-->
-	<select id="dupjoin" resultType="com.hb.mybatis.UVO" parameterType="com.hb.mybatis.UVO">
+	<select id="dupjoin" resultType="com.hb.mybatis.UVO" parameterType="String">
 		select * from customer where cus_id = #{cus_id}
 	</select>
 	
@@ -19,6 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{cus_id},#{cus_pw},#{cus_birth},#{cus_gender},#{cus_email},#{cus_phone},
 		#{cus_addr},#{cus_recomm},#{cus_point})	
 	</insert>
+	
+	<!-- 회원 정보변경 -->
+	<update id="usermodify" parameterType="com.hb.mybatis.UVO">
+		update customer set cus_pw=#{cus_pw}, cus_name=#{cus_name}, cus_birth=#{cus_birth},
+		cus_gender=#{cus_gender}, cus_email=#{cus_email}, cus_phone=#{cus_phone}, cus_addr=#{cus_addr} 
+		where cus_id = #{cus_id}
+	</update>
+	
 	
 	<!-- 전체상품리스트 -->
     <select id="productlist" resultType="com.hb.mybatis.PVO">

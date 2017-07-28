@@ -7,10 +7,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+<style type="text/css">
+</style>
 </head>
 <body>
 <jsp:include page="${request.contextPath}/menu" flush="false" />
-	<b>	${uvo.cus_name}님 환영합니다.</b>
+	<b style="font-size: 50px;">	${uvo.cus_name}님 환영합니다. 로그인 후 사용해 주세요</b>
 		
 </body>
 </html>

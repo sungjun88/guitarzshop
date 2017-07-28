@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hb.mybatis.BVO;
 import com.hb.mybatis.CART;
 import com.hb.mybatis.DAO;
 import com.hb.mybatis.OIVO;
@@ -229,6 +228,7 @@ public class HomeController {
 	public ModelAndView getJoinPage(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView("joinpage");
+		session.setAttribute("dupchk", 0);
 		return mv;
 	}
 	
@@ -248,22 +248,30 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		session.setAttribute("join", 0);
 		
-		if(dao.getDupJoin(uvo)==null){
+
 			if(dao.getJoin(uvo)==1){
 				session.setAttribute("uvo", uvo);
 				return new ModelAndView("joinok");
 			}else{
 				request.setAttribute("join", -1);		//리퀘스트로 바꿔도 될것 같다.	
-				return new ModelAndView("loginpage");
+				return new ModelAndView("joinpage");
 			}
-		}else{
-			request.setAttribute("join", -1);		//리퀘스트로 바꿔도 될것 같다.	
-			return new ModelAndView("joinpage");
-		}
-		
-		
 		
 	}
+	
+	@RequestMapping(value = "/dupidchk.do")
+	public ModelAndView dupIdChk(HttpServletRequest request) {
+		//HttpSession session = request.getSession();
+		int dupchk;
+		if(dao.getDupJoin(request.getParameter("cus_id")) == null){//성공
+			dupchk = 1;
+		}else{//실패
+			dupchk = 0;
+		}
+		request.setAttribute("dupchk", dupchk);
+		return new ModelAndView("ajax_result");
+	}
+	
 	
 	
 	//bottom of topnav
@@ -328,15 +336,35 @@ public class HomeController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value = "/oi_pro_delete.do")
+	public ModelAndView oiProDelete(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("contentpage");
+		HttpSession session = request.getSession();
+		CART cart = new CART();
+		cart.setDao(dao);
+		String prolist_idx = request.getParameter("prolist_idx");
+		List<OIVO> sessionlist = (List<OIVO>)session.getAttribute("cartlist");
+		sessionlist.remove(Integer.parseInt(prolist_idx));
+		session.setAttribute("cartlist", sessionlist);
+		session = request.getSession();
+		session.getAttribute("cart");
+		mv = new ModelAndView("cartpage");
+		return mv;
+	}
 
 	
 	@RequestMapping(value = "/cartpage.do")
 	public ModelAndView cartPage(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.getAttribute("cart");
+		session.getAttribute("cartlist");
+		
 		ModelAndView mv = new ModelAndView("cartpage");
 		return mv;
 	}
+	
+	
 	
 	@RequestMapping(value = "/profilePage.do")
 	public ModelAndView profilePage(HttpServletRequest request) {
@@ -349,8 +377,6 @@ public class HomeController {
 			login = session.getAttribute("login").toString();
 		}
 		if(login.equals("1")){
-			
-			
 			mv = new ModelAndView("profilePage");
 		}else{
 			request.setAttribute("login2", true);
@@ -360,8 +386,8 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/modify.do")
-	public ModelAndView getModify(HttpServletRequest request){
+	@RequestMapping(value = "/userModify.do")
+	public ModelAndView userModify(HttpServletRequest request){
 		UVO uvo = new UVO();
 		uvo.setCus_name(request.getParameter("cus_name"));
 		uvo.setCus_id(request.getParameter("cus_id"));
@@ -371,19 +397,20 @@ public class HomeController {
 		uvo.setCus_email(request.getParameter("cus_email"));
 		uvo.setCus_phone(request.getParameter("cus_phone"));
 		uvo.setCus_addr(request.getParameter("cus_addr"));
-		uvo.setCus_recomm(request.getParameter("cus_recomm"));
-		uvo.setCus_point("0");
 		HttpSession session = request.getSession();
-		session.setAttribute("join", 0);
-		if(dao.getJoin(uvo)==1){
+		System.out.println(uvo);
+		int res = dao.userModify(uvo);
+		if(res==1){
 			session.setAttribute("uvo", uvo);
-			return new ModelAndView("joinok");
+			request.setAttribute("userModiOk", 1);
+			return new ModelAndView("profilePage");
 		}else{
-			request.setAttribute("join", -1);			
-			return new ModelAndView("loginpage");
+			return new ModelAndView("profilePage");
 		}
-		
 	}
+	
+	
+	
 	
 	
 }

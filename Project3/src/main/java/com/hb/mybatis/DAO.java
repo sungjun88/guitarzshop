@@ -31,14 +31,22 @@ public class DAO {
 	}
 	
 	//중복아이디 가입 방지
-	public UVO getDupJoin(UVO uvo){
-		return template.selectOne("dupjoin", uvo);
+	public UVO getDupJoin(String cus_id){
+		return template.selectOne("dupjoin", cus_id);
 	}
 		
 	// 회원가입
 	public int getJoin(UVO uvo){
 		return template.insert("join", uvo);
 	}
+	
+	//회원정보 수정
+	public int userModify(UVO uvo){
+		int res = template.update("usermodify", uvo);
+		return res;
+	}
+	
+	
 	
 	// 전체상품리스트
 	public List<PVO> getProductList(){
